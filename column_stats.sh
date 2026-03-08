@@ -6,14 +6,14 @@ if [[ $# -ne 2 ]]; then
 fi
 
 FILE="$1"
-COLUMN="2"
+COLUMN="$2"
 
-if [[ ! -f "$FILE" ]];trhen
-	echo "'$FILE' not found"
+if [[ ! -f "$FILE" ]]; then
+	echo "Error: file '$FILE' not found"
 	exit 1
 fi
 
-if ! [[ "$COLUMN" =~ ^[0-9]+$ ]]; then
+if ! [[ "$COLUMN" =~ ^[1-9][0-9]*$ ]]; then
 	echo "must be a number"
 	exit 1
 fi
@@ -24,13 +24,13 @@ NR == 1 { next }
 	x = $col
 	if (x == "")
 		next
-	if(x !~ /^[0-9]+(\.[0-9]+?$/)
+	if(x !~ /^[0-9]+(\.[0-9]+)?$/)
 		next
 	if(count == 0)
 	{
 		min = x
 		max = x
-	{
+	}
 	count++
 	sum += x
 	if (x<min)
@@ -40,7 +40,7 @@ NR == 1 { next }
 }
 END{
 	if (count == 0){
-		print "no data found in column" col
+		print "Error: no numeric found in column " col
 		exit 1
 	}
 	print "Column:", col
