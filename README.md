@@ -11,3 +11,5 @@ Outputs:
 -mean
 
 Usage: ./column_stats.sh <tsv> <column_number>
+
+AI assistance: Used for debugging, checking for little errors.  Everything was reviewed by me and fully understood
